@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using IntermediateLab_Backend.Domain.Enums;
 
-namespace IntermediateLab_Backend.Application.DTO;
+namespace IntermediateLab_Backend.Application.DTO.Member;
 
-public class RegisterMemberDTO
+public record RegisterMemberDTO
 {
 	[MaxLength(100)]
 	public string Username { get; set; } = null!;

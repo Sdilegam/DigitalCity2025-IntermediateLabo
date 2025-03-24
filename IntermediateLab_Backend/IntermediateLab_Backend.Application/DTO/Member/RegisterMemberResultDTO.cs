@@ -1,9 +1,8 @@
-using IntermediateLab_Backend.Domain.Entities;
 using IntermediateLab_Backend.Domain.Enums;
 
-namespace IntermediateLab_Backend.Application.DTO;
+namespace IntermediateLab_Backend.Application.DTO.Member;
 
-public class RegisterMemberResultDTO(Member member)
+public record RegisterMemberResultDTO(Domain.Entities.Member member)
 {
 	public int        Id       { get; set; } = member.Id;
 	public string     Username { get; set; } = member.Username;

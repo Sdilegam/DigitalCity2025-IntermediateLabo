@@ -12,6 +12,7 @@ namespace IntermediateLab_Backend.Infrastructure;
 public class LaboContext(DbContextOptions options) : DbContext(options)
 {
 	public DbSet<Member> Members { get; set; }
+	public DbSet<Tournament> Tournaments { get; set; }
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{

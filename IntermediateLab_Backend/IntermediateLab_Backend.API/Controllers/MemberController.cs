@@ -1,5 +1,6 @@
 using System.Net.Mail;
 using IntermediateLab_Backend.Application.DTO;
+using IntermediateLab_Backend.Application.DTO.Member;
 using IntermediateLab_Backend.Application.Exceptions;
 using IntermediateLab_Backend.Application.Interfaces.Service;
 using IntermediateLab_Backend.Domain.Entities;
@@ -7,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IntermediateLab_Backend.API.Controllers;
 
+[ApiController]
+[Route("api/[controller]")]
 public class MemberController(IMemberService memberService) : ControllerBase
 {
 	[HttpPost]

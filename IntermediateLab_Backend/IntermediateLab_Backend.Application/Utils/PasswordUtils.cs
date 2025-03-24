@@ -13,9 +13,15 @@ public class PasswordUtils
 		return (hashedPassword);
 	}
 
-	public static string GeneratePassword(in int lenght)
+
+	public static string GeneratePassword(int length = 10)
 	{
-		string generatedPassword = string.Empty;
-		return (generatedPassword);
+		string result = string.Empty;
+		for (int i = 0; i < length; i++)
+		{
+			char letter = (char)new Random().Next(65, 91);
+			result += letter;
+		}
+		return result;
 	}
 }

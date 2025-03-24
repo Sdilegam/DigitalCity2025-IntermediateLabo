@@ -1,5 +1,6 @@
 using System.Transactions;
 using IntermediateLab_Backend.Application.DTO;
+using IntermediateLab_Backend.Application.DTO.Member;
 using IntermediateLab_Backend.Application.Exceptions;
 using IntermediateLab_Backend.Application.Interfaces;
 using IntermediateLab_Backend.Application.Interfaces.Repositories;
@@ -41,8 +42,8 @@ public class MemberService(IMemberRepository memberRepository, IMailer mailer): 
 		// envoyer un email au membre
 		mailer.Send(memberToReturn.Email, 
 					"Bienvenue sur ChessTournament.Com",
-					$"Vos informations de connections sont:\n" +
-					$"- Pseudo: {memberToReturn.Username}\n"   +
+					$"Vos informations de connections sont:<br>" +
+					$"- Pseudo: {memberToReturn.Username}<br>"   +
 					$"- Mot de passe: {password}"
 					);
 		transactionScope.Complete();

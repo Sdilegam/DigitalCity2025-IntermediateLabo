@@ -1,4 +1,5 @@
 using IntermediateLab_Backend.Application.DTO;
+using IntermediateLab_Backend.Application.DTO.Member;
 using IntermediateLab_Backend.Domain.Entities;
 
 namespace IntermediateLab_Backend.Application.Interfaces.Service;
