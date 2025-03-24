@@ -9,18 +9,20 @@ namespace IntermediateLab_Backend.Infrastructure.Smtp;
  */
 public class Mailer(SmtpClient smtpClient, IConfiguration configuration): IMailer
 {
-	public void Send(string destination, string subject, string body, params Attachment[] attachments)
+	public void Send(string[] destinationArray, string subject, string body, params Attachment[] attachmentsArray)
 	{
 		MailMessage mMessage = new()
 							   {
-								   To      = { new MailAddress(destination) },
 								   From = new MailAddress(configuration["Smtp:Username"] ?? throw new Exception("Missing smtp config")),
 								   Subject = subject,
 								   Body    = body,
 								   IsBodyHtml = true
 							   };
-
-		foreach (Attachment attachment in attachments)
+		foreach (string destination in destinationArray)
+		{
+			mMessage.To.Add(new MailAddress(destination));
+		}
+		foreach (Attachment attachment in attachmentsArray)
 			mMessage.Attachments.Add(attachment);
 		smtpClient.Send(mMessage);
 	}

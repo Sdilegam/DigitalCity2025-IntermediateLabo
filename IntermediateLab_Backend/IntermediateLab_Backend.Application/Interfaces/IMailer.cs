@@ -8,5 +8,5 @@ namespace IntermediateLab_Backend.Application.Interfaces;
 
 public interface IMailer
 {
-	void Send(string destination, string subject, string body, params Attachment[] attachments);
+	void Send(string[] destination, string subject, string body, params Attachment[] attachments);
 }

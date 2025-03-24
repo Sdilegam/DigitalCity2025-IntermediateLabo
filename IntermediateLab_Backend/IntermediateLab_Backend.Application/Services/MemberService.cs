@@ -40,7 +40,7 @@ public class MemberService(IMemberRepository memberRepository, IMailer mailer): 
 								 Elo       = memberDTO.Elo ?? 1200,
 							 });
 		// envoyer un email au membre
-		mailer.Send(memberToReturn.Email, 
+		mailer.Send([memberToReturn.Email], 
 					"Bienvenue sur ChessTournament.Com",
 					$"Vos informations de connections sont:<br>" +
 					$"- Pseudo: {memberToReturn.Username}<br>"   +

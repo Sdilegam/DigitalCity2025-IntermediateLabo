@@ -17,5 +17,7 @@ public class LaboContext(DbContextOptions options) : DbContext(options)
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
 		modelBuilder.ApplyConfiguration(new MemberConfig());
+		modelBuilder.ApplyConfiguration(new TournamentConfig());
+		
 	}
 }

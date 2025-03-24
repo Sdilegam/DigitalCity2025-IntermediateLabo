@@ -10,7 +10,7 @@ public class MemberConfig: IEntityTypeConfiguration<Member>
 {
 	public void Configure(EntityTypeBuilder<Member> builder)
 	{
-		builder.ToTable(t => t.HasCheckConstraint("CK_ELO", "Elo BETWEEN 0 AND 3000"));
+		builder.ToTable(table => table.HasCheckConstraint("CK_MEMBER_ELO", "Elo BETWEEN 0 AND 3000"));
 		builder.Property(member => member.Username)
 			   .IsRequired()
 			   .HasMaxLength(100);
