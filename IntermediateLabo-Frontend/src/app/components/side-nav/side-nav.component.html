@@ -1,0 +1,7 @@
+<nav>
+
+
+@for (route of routes; track $index) {
+  <div><a href="{{route.path}}">{{ route.path }}</a></div>
+}
+</nav>

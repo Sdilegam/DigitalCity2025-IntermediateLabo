@@ -1,0 +1,107 @@
+<form [formGroup]="registerForm" (submit)="submit()">
+  <p-card>
+    <ng-template #title>
+      Creer un tournoi
+    </ng-template>
+    <div class="grid">
+      <div class="col-6">
+        <p-float-label variant="on">
+          <input pInputText formControlName="name">
+          <label>Nom du tournoi</label>
+        </p-float-label>
+      </div>
+      <div class="col-6">
+        <p-float-label variant="on">
+          <input pInputText formControlName="location">
+          <label>Lieu du tournoi</label>
+        </p-float-label>
+      </div>
+      <div [formGroup]="registerForm.controls['playerAmount']" class="col-6 flex flex-row">
+        <p-float-label class="w-full" variant="on">
+          <input type="number" pInputText formControlName="minPlayerAmount">
+          <label>Nombre minimum de joueur</label>
+        </p-float-label>
+        <p-float-label class="w-full" variant="on">
+          <input type="number" pInputText formControlName="maxPlayerAmount">
+          <label>Nombre maximum de joueur</label>
+        </p-float-label>
+        <app-form-error [control]="PlayerAmountForm"></app-form-error>
+      </div>
+      <div [formGroup]="registerForm.controls['playerElo']" class="col-6 flex flex-row">
+        <p-float-label class="w-full" variant="on">
+          <input type="number" pInputText formControlName="minPlayerElo">
+          <label>Elo minimum des joueur</label>
+        </p-float-label>
+        <p-float-label class="w-full" variant="on">
+          <input type="number" pInputText formControlName="maxPlayerElo">
+          <label>Elo maximum des joueur</label>
+        </p-float-label>
+        <app-form-error [control]="PlayerEloForm"></app-form-error>
+      </div>
+
+      <div class="col-6">
+        <p-float-label class="w-full" variant="on">
+          <p-date-picker formControlName="inscriptionsEndDate" class="w-full"></p-date-picker>
+          <label>Date de fin d'inscription</label>
+        </p-float-label>
+      </div>
+      <div class="col-6">
+        <p-floatLabel p-float-label variant="on">
+          <p-multiSelect [options]="categories"
+                         formControlName="categories"
+                         styleClass="w-full"
+                         optionLabel="label"
+                         optionValue="value"
+                         filter="false"
+                         emptyMessage="Aucun"></p-multiSelect>
+          <label>Categories</label>
+        </p-floatLabel>
+      </div>
+      <div class="col-6">
+        <label>
+        <p-checkbox
+          formControlName="isWomenOnly"
+          [binary]="true"
+          inputId="women"/>
+          Reserve aux femmes
+        </label>
+      </div>
+
+      <!--      <div class="col-6">-->
+      <!--        <p-float-label p-float-label variant="on">-->
+      <!--          <input pInputText formControlName="email">-->
+      <!--          <label>Email</label>-->
+      <!--        </p-float-label>-->
+      <!--        <app-form-error [control]="registerForm.get('email')!"></app-form-error>-->
+      <!--      </div>-->
+      <!--      <div class="col-6">-->
+      <!--        <p-floatLabel p-float-label variant="on">-->
+      <!--          <input pInputText type="number" formControlName="elo">-->
+      <!--          <label>Elo</label>-->
+      <!--        </p-floatLabel>-->
+      <!--      </div>-->
+      <!--      <div class="col-6">-->
+      <!--        <p-floatLabel p-float-label variant="on">-->
+      <!--          <p-calendar styleClass="w-full" formControlName="birthDate"></p-calendar>-->
+      <!--          <label>Date de naissance</label>-->
+      <!--        </p-floatLabel>-->
+      <!--      </div>-->
+      <!--      <div class="col-6">-->
+      <!--        <p-floatLabel p-float-label variant="on">-->
+      <!--          <p-select [options]="genders"-->
+      <!--                    formControlName="gender"-->
+      <!--                    styleClass="w-full"-->
+      <!--                    optionLabel="label"-->
+      <!--                    optionValue="value"-->
+      <!--                    emptyMessage="Aucun"></p-select>-->
+      <!--        </p-floatLabel>-->
+    </div>
+
+    <ng-template #footer>
+      <p-button type="submit" [disabled]="isLoading"
+                [loading]="isLoading"
+                loadingIcon="pi pi-cog"
+                label="Sauver"></p-button>
+    </ng-template>
+  </p-card>
+</form>

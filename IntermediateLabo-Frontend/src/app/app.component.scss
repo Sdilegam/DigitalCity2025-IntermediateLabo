@@ -1,0 +1,18 @@
+.mainContainer{
+  display: grid;
+  height: 100%;
+  grid-template-columns:300px 1fr;
+  flex-grow: 1;
+}
+
+.main{
+  padding: 1rem;
+  background-color: lightgray;
+  height: 100%;
+}
+:host{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  height: 100%;
+}
