@@ -20,16 +20,21 @@ namespace IntermediateLab_Backend.API.Controllers
 	[ApiController]
 	public class TournamentController(ITournamentService tournamentService) : ControllerBase
 	{
-
 		[HttpGet]
-		public IActionResult Get()
+		public IActionResult GetAllTournaments()
 		{
-			GetTournamentsDTO[] tournamentsToReturn = tournamentService.Get();
+			GetTournamentsDTO[] tournamentsToReturn = tournamentService.GetAllTournaments();
 
 			return (Ok((tournamentsToReturn)));
 		}
-		
-		
+		[HttpGet("{tournamentId}")]
+		public IActionResult GetTournament([FromRoute] int tournamentId)
+		{
+			Tournament? tournamentsToReturn = tournamentService.GetTournament(tournamentId);
+			if (tournamentsToReturn == null)
+				return NotFound();
+			return (Ok((tournamentsToReturn)));
+		}
 		[HttpPost]
 		public IActionResult PostTournament(CreateTournamentDTO tournamentDTO)
 		{
@@ -66,6 +71,46 @@ namespace IntermediateLab_Backend.API.Controllers
 			}
 		}
 
-
+		[HttpPatch("{id}/start")]
+		public IActionResult StartTournament([FromRoute] int id)
+		{
+			bool returnValue;
+			try
+			{
+				returnValue = tournamentService.StartTournament(id);
+			}
+			catch (Exception e)
+			{
+				return NotFound(e.Message);
+			}
+			if (!returnValue)
+			{
+				return (Problem("Le tournoi ne remplis pas les conditions requises pour etre lancé"));
+			}
+			return (Ok());
+		}
+		[HttpPatch("{id}/nextRound")]
+		public IActionResult NextRound([FromRoute] int id)
+		{
+			return (Ok());
+		}
+		
+		[Route("inscription/{tournamentId}")]
+		[HttpPost]
+		public IActionResult RegisterToTournament([FromRoute] int tournamentId)
+		{
+			GetTournamentsDTO? tournamentToReturn = null;
+			
+			return Ok(tournamentToReturn = tournamentToReturn);
+		}
+		[Route("inscription/{tournamentId}")]
+		[HttpDelete]
+		public IActionResult UnregisterFromTournament([FromRoute] int tournamentId)
+		{
+			GetTournamentsDTO? tournamentToReturn = null;
+			
+			return Ok(tournamentToReturn = tournamentToReturn);
+		}
+		
 	}
 }

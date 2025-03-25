@@ -12,6 +12,12 @@ namespace IntermediateLab_Backend.API.Controllers;
 [Route("api/[controller]")]
 public class MemberController(IMemberService memberService) : ControllerBase
 {
+
+	[HttpGet]
+	public IActionResult Get([FromRoute]int tournamentID)
+	{
+		return(Ok(memberService.GetTournamentMembers(tournamentID)));
+	}
 	[HttpPost]
 	public IActionResult Post([FromBody] RegisterMemberDTO memberDTO)
 	{

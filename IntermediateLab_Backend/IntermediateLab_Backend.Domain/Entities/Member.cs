@@ -13,5 +13,5 @@ public class Member
 	public DateTime   BirthDate { get; set; }
 	public RoleEnum   Role      { get; set; }
 	public GenderEnum Gender    { get; set; }
-	public Tournament[] Tournaments { get; set; }
+	public List<Tournament> Tournaments { get; set; }
 }

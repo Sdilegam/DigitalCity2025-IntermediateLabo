@@ -8,4 +8,5 @@ public interface IMemberService
 {
 	Member Register(RegisterMemberDTO dto);
 	bool ExistsEmail(string email);
+	public Member[] GetTournamentMembers(int tournamentID);
 }

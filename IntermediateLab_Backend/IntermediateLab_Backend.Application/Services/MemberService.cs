@@ -55,4 +55,14 @@ public class MemberService(IMemberRepository memberRepository, IMailer mailer): 
 		var toReturn = memberRepository.Any(member => member.Email == email);
 		return (toReturn);
 	}
+
+	public Member[] GetTournamentMembers(int tournamentID)
+	{
+		return (memberRepository.FindWhere(member => member.Tournaments.Any(tournament => tournament.Id == tournamentID)).ToArray());
+	}
+
+	public Tournament? GetTournament(int id)
+	{
+		throw new NotImplementedException();
+	}
 }

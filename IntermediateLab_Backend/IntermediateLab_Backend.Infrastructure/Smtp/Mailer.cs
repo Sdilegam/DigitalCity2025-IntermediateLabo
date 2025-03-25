@@ -27,3 +27,4 @@ public class Mailer(SmtpClient smtpClient, IConfiguration configuration): IMaile
 		smtpClient.Send(mMessage);
 	}
 }
+
