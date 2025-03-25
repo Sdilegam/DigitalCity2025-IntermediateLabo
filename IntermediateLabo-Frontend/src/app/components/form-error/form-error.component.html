@@ -1,0 +1,7 @@
+@if(control().getError('exist')) {
+    <p>Cette valeur est déjà utilisée</p>
+}
+
+@if(control().getError('maxTooLow')) {
+    <p>Le maximum ne doit pas etre inferieur au minimum</p>
+}
