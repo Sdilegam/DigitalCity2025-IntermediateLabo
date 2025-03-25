@@ -24,7 +24,7 @@ public class TournamentService(ITournamentRepository tournamentRepository, IMail
 
 		if (DTO.InscriptionsEndDate < creationDate.AddDays(DTO.MaxPlayerAmount))
 			throw new ArgumentOutOfRangeException(nameof(DTO.InscriptionsEndDate));
-
+		int categories = DTO.Categories.Sum();
 		using TransactionScope transactionScope = new();
 		Tournament tournamentToReturn = new()
 										{
@@ -37,7 +37,8 @@ public class TournamentService(ITournamentRepository tournamentRepository, IMail
 											InscriptionsEndDate = DTO.InscriptionsEndDate,
 											CreationDate        = creationDate,
 											LatestUpdate        = creationDate,
-											Categories          = DTO.Categories,
+											Categories          = (TournamentCatEnum)categories,
+											// Categories          = DTO.Categories,
 											CurrRound           = 0,
 											Status              = TournamentStatusEnum.WaitingForPlayers,
 											IsWomenOnly         = DTO.IsWomenOnly,

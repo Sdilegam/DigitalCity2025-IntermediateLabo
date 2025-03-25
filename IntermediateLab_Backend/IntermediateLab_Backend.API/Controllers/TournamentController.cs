@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using IntermediateLab_Backend.Domain.Entities;
+using IntermediateLab_Backend.Domain.Enums;
 using IntermediateLab_Backend.Infrastructure;
 
 namespace IntermediateLab_Backend.API.Controllers
