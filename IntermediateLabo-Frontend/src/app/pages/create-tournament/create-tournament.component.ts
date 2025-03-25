@@ -1,20 +1,18 @@
 import {Component, inject} from '@angular/core';
 import {Button} from "primeng/button";
-import {Calendar} from "primeng/calendar";
 import {Card} from "primeng/card";
 import {FloatLabel} from "primeng/floatlabel";
 import {FormErrorComponent} from "../../components/form-error/form-error.component";
-import {AbstractControl, FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {InputText} from "primeng/inputtext";
-import {Select} from "primeng/select";
 import {Router} from '@angular/router';
 import {MessageService} from 'primeng/api';
-import {MemberService} from '../../services/member.service';
-import {catchError, finalize, map, of} from 'rxjs';
+import {finalize} from 'rxjs';
 import {Checkbox} from 'primeng/checkbox';
 import {DatePicker} from 'primeng/datepicker';
 import {TournamentService} from '../../services/tournament.service';
 import {MultiSelect} from 'primeng/multiselect';
+import {TournamentCatEnum} from '../../enums/tournament-cat-enum';
 
 @Component({
   imports: [
@@ -41,11 +39,8 @@ export class CreateTournamentComponent {
   messageService = inject(MessageService);
   tournamentService = inject(TournamentService);
   // faire des requètes vers l'api
-  categories = [
-    { label: 'junior', value: 0 },
-    { label: 'senior', value: 1 },
-    { label: 'veteran', value: 2 },
-  ]
+  categories = TournamentCatEnum
+
   isLoading = false;
 
   PlayerAmountForm = this.fb.group({
