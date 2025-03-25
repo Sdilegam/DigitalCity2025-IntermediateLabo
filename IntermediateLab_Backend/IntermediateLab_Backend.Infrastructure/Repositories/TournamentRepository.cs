@@ -1,6 +1,6 @@
+using Be.Khunly.EFRepository;
 using IntermediateLab_Backend.Application.Interfaces.Repositories;
 using IntermediateLab_Backend.Domain.Entities;
-using Khun.ToolBox.EF.Repository;
 
 namespace IntermediateLab_Backend.Infrastructure.Repositories;
 

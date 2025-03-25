@@ -33,4 +33,5 @@ public class Tournament
 	public DateTime             InscriptionsEndDate { get; set; }
 	public DateTime             CreationDate        { get; set; }
 	public DateTime             LatestUpdate        { get; set; }
+	public Member[] Players { get; set; }
 }

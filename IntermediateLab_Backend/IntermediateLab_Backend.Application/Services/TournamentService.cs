@@ -10,6 +10,25 @@ namespace IntermediateLab_Backend.Application.Services;
 
 public class TournamentService(ITournamentRepository tournamentRepository, IMailer mailer) : ITournamentService
 {
+	public GetTournamentsDTO[] Get()
+	{
+		List<Tournament>  tournamentsToReturn = tournamentRepository.FindWhere(tournament => tournament.Status!= TournamentStatusEnum.Over).OrderByDescending(tournaments => tournaments.LatestUpdate).Take(10).ToList();
+		GetTournamentsDTO[] DTOToReturn = tournamentsToReturn.Select(tournament => new GetTournamentsDTO 
+		{
+			Name = tournament.Name,
+			Location =  tournament.Location,
+			MinPlayerAmount =  tournament.MinPlayerAmount,
+			MaxPlayerAmount =   tournament.MaxPlayerAmount,
+			Categories = CategoriesEnumToIntArray(tournament.Categories),
+			Status = tournament.Status,
+			InscriptionsEndDate = tournament.InscriptionsEndDate,
+			MaxPlayerElo =  tournament.MaxPlayerElo,
+			MinPlayerElo =  tournament.MinPlayerElo,
+			CurrentRound = tournament.CurrRound,
+			CurrentPlayerNumber = tournament.Players.Length
+		}).ToArray();
+		return (DTOToReturn);
+	}
 	public Tournament Create(CreateTournamentDTO DTO)
 	{
 		if (DTO.MaxPlayerElo < 0 || DTO.MaxPlayerElo > 3000)
@@ -63,5 +82,13 @@ public class TournamentService(ITournamentRepository tournamentRepository, IMail
 		mailer.Send(["test@test.com"], $"Supression du tournoi {tournamentToDelete.Id}", $"Le tournoi {tournamentToDelete.Name} auquel vous vous etes inscris vient d'etre supprime.",[]);
 		transactionScope.Complete();
 		return (true);
+	}
+	private int[] CategoriesEnumToIntArray(TournamentCatEnum catEnum)
+	{
+		int[] flags = catEnum.ToString()
+			.Split(new string[] { ", " }, StringSplitOptions.None)
+			.Select(i => (int)Enum.Parse(catEnum.GetType(), i))
+			.ToArray();
+		return flags;
 	}
 }

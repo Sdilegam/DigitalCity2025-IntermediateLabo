@@ -7,4 +7,6 @@ public interface ITournamentService
 {
 	public Tournament Create(CreateTournamentDTO DTO);
 	public bool       Delete(int                 id);
+	public GetTournamentsDTO[] Get();
+
 }

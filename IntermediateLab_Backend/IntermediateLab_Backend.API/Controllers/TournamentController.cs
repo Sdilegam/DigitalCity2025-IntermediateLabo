@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using IntermediateLab_Backend.Domain.Entities;
 using IntermediateLab_Backend.Domain.Enums;
 using IntermediateLab_Backend.Infrastructure;
+using Newtonsoft.Json;
 
 namespace IntermediateLab_Backend.API.Controllers
 {
@@ -19,6 +20,16 @@ namespace IntermediateLab_Backend.API.Controllers
 	[ApiController]
 	public class TournamentController(ITournamentService tournamentService) : ControllerBase
 	{
+
+		[HttpGet]
+		public IActionResult Get()
+		{
+			GetTournamentsDTO[] tournamentsToReturn = tournamentService.Get();
+
+			return (Ok((tournamentsToReturn)));
+		}
+		
+		
 		[HttpPost]
 		public IActionResult PostTournament(CreateTournamentDTO tournamentDTO)
 		{
@@ -54,5 +65,7 @@ namespace IntermediateLab_Backend.API.Controllers
 				return BadRequest(e.Message);
 			}
 		}
+
+
 	}
 }
