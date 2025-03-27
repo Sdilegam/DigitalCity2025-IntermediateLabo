@@ -1,4 +1,6 @@
+using IntermediateLab_Backend.Application.Utils;
 using IntermediateLab_Backend.Domain.Entities;
+using IntermediateLab_Backend.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -16,6 +18,24 @@ public class TournamentConfig: IEntityTypeConfiguration<Tournament>
 
 		builder.Property(tournament => tournament.Name).HasMaxLength(200);
 		builder.Property(tournament => tournament.Location).HasMaxLength(200);
+		builder.HasData(new Tournament()
+		{
+			Id = -1,
+			Name = "Tournament From Seed",
+			Location = "Bruxelles",
+			Categories = TournamentCatEnum.Junior,
+			Status = TournamentStatusEnum.WaitingForPlayers,
+			CreationDate = DateTime.Now,
+			LatestUpdate = DateTime.Now,
+			CurrRound = 0,
+			InscriptionsEndDate = DateTime.Now.AddDays(25),
+			MinPlayerAmount = 2,
+			MaxPlayerAmount = 10,
+			MinPlayerElo = 100,
+			MaxPlayerElo = 3000,
+			IsWomenOnly = false,
+			Players = []
+		});
 		
 	}
 	
