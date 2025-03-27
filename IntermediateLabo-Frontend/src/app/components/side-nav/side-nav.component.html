@@ -1,7 +1,14 @@
-<nav>
-
-
-@for (route of routes; track $index) {
-  <div><a href="{{route.path}}">{{ route.path }}</a></div>
-}
+<nav [ngClass]="{'closed': sideBarOpenend==false}">
+  <div>
+    <a routerLink="tournaments">
+      <i class="pi pi-flag"></i>
+      <span>Liste des tournois</span>
+    </a>
+  </div>
+    <div>
+    <a>
+      <i class="pi pi-users"></i>
+      <span>Liste des membres</span>
+    </a>
+  </div>
 </nav>

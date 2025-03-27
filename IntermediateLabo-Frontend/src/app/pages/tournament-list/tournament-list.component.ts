@@ -4,8 +4,10 @@ import {TournamentService} from '../../services/tournament.service';
 import {ButtonModule} from 'primeng/button';
 import {TableModule} from 'primeng/table';
 import {NgForOf} from '@angular/common';
-import {RouterLink} from '@angular/router';
-import {StyleClass} from 'primeng/styleclass';
+import {ActivatedRoute, RouterLink} from '@angular/router';
+import {Card} from 'primeng/card';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {TournamentCatEnum} from '../../enums/tournament-cat-enum';
 
 @Component({
   imports: [
@@ -13,7 +15,9 @@ import {StyleClass} from 'primeng/styleclass';
     NgForOf,
     RouterLink,
     ButtonModule,
-    StyleClass
+    Card,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   templateUrl: './tournament-list.component.html',
   styleUrl: './tournament-list.component.scss'
@@ -36,13 +40,15 @@ export class TournamentListComponent {
     {field:"inscriptionsEndDate", header:"Date de fin d'inscription"},
     {field:"currentRound", header:"Ronde courante"},
   ]
-
+  route = inject(ActivatedRoute)
   constructor() {
     this.tournamentService.getAllTournament().subscribe(list => this.TournamentList = list);
-
+    console.log(this.route.snapshot.params['id']);
   }
   test(){
     // this.tournamentService.getAllTournament().subscribe(x=>this.TournamentList = x);
     console.log(this.TournamentList);
   }
+
+  protected readonly categories = TournamentCatEnum;
 }

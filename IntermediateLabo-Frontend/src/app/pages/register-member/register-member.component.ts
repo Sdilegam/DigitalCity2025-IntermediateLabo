@@ -15,7 +15,7 @@ import { catchError, finalize, map, of } from 'rxjs';
 import { FormErrorComponent } from "../../components/form-error/form-error.component";
 
 @Component({
-  imports: [CommonModule, Button, InputText, FloatLabel, Calendar, Card, Fieldset, ReactiveFormsModule, Select, FormErrorComponent],
+  imports: [CommonModule, Button, InputText, FloatLabel, Calendar, Card, ReactiveFormsModule, Select, FormErrorComponent],
   templateUrl: './register-member.component.html',
   styleUrl: './register-member.component.scss'
 })
@@ -48,7 +48,7 @@ export class RegisterMemberComponent {
     ]],
     birthDate: [null, [Validators.required, /* Valider la date de naissance */]],
     elo: [null, [Validators.min(0), Validators.max(3000)]],
-    gender: [null, [Validators.required]]
+    gender: [[], [Validators.required]]
   });
 
   constructor() {
@@ -78,7 +78,7 @@ export class RegisterMemberComponent {
           this.messageService.add({ severity: 'error', summary: error.error });
 
         }
-        
+
         //this.isLoading = false;
       }
     })

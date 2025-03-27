@@ -1,7 +1,7 @@
-<app-header></app-header>
+<app-header [(sideBarOpened)]="sideBarOpened"></app-header>
 
 <div class="mainContainer">
-  <app-side-nav></app-side-nav>
+  <app-side-nav class="flex-container" [sideBarOpenend]="sideBarOpened"></app-side-nav>
   <div class="main">
     <router-outlet></router-outlet>
   </div>

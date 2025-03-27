@@ -7,4 +7,5 @@ export const routes: Routes = [
   { path: 'member/register', component: RegisterMemberComponent },
   { path: 'tournaments/create', component: CreateTournamentComponent },
   { path: 'tournaments', component: TournamentListComponent },
+  { path: 'tournaments/:id', component: TournamentListComponent },
 ];

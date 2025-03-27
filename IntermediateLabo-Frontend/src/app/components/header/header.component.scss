@@ -1,5 +1,10 @@
 :host {
-  background-color: skyblue;
-  padding-block: .5rem;
-  display: block;
+  background-color: var(--p-primary-700);
+  color: white;
+  padding: 1rem;
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }

@@ -1,14 +1,26 @@
 .mainContainer{
   display: grid;
   height: 100%;
-  grid-template-columns:300px 1fr;
+  grid-template-columns:20rem 1fr;
   flex-grow: 1;
+  transition: grid-template-columns linear .2s;
+  &:has(nav.closed){
+  grid-template-columns:3rem 1fr;
+  }
+  z-index: 1;
 }
-
+app-header{
+  z-index: 2;
+}
+app-side-nav{
+  z-index: 1;
+}
 .main{
   padding: 1rem;
   background-color: lightgray;
   height: 100%;
+  z-index: 2;
+  box-shadow: -1px 0px 10px 0px rgba(0, 0, 0, 0.7);
 }
 :host{
   display: flex;

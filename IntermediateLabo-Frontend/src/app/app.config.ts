@@ -3,7 +3,8 @@ import { provideRouter } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import Material from '@primeng/themes/material';
-import Aura from '@primeng/themes/aura';
+import Lara from '@primeng/themes/lara';
+import Aura from '@primeng/themes/Aura';
 import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { providePrimeNG } from 'primeng/config';
@@ -21,7 +22,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {
-        preset: Aura,
+        preset: Material,
       }
     }),
     MessageService,

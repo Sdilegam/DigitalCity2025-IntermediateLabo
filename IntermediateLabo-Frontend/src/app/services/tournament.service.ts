@@ -12,9 +12,9 @@ export class TournamentService {
   constructor() { }
 
   getAllTournament(){
-    return this.httpClient.get<TournamentListItem[]>(environment.baseApiUrl + '/tournament')
+    return this.httpClient.get<TournamentListItem[]>(environment.baseApiUrl + '/Tournament')
   }
   register(form: any){
-    return this.httpClient.post(environment.baseApiUrl + '/tournament', form);
+    return this.httpClient.post(environment.baseApiUrl + '/Tournament', form);
   }
 }

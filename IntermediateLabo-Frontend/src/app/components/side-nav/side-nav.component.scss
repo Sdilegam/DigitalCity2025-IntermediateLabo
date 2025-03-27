@@ -1,3 +1,40 @@
-:host{
-  background-color: beige;
+:host {
+  background-color: var(--p-surface-600);
+  overflow: hidden;
+  width: 20rem;
+}
+
+.closed{
+  a>span:nth-child(2){
+    opacity: 0%;
+  }
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  > div {
+    a {
+      display: flex;
+      align-items: center;
+      padding-block: 1rem;
+      padding-left: 1rem;
+      background-color: var(--p-surface-700);
+      width: 100%;
+      text-decoration: none;
+      color: var(--p-primary-50);
+      >i{
+        margin-right: 1rem;
+      }
+      >span{
+        transition: 0.3s;
+      }
+      &:hover {
+        background-color: var(--p-primary-900);
+      }
+      &:visited {
+        text-decoration: none;
+      }
+    }
+  }
 }
