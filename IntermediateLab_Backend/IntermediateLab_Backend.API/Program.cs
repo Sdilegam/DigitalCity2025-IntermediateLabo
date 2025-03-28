@@ -1,13 +1,20 @@
 using System.Net;
 using System.Net.Mail;
+using System.Text;
 using IntermediateLab_Backend.Application.Interfaces;
 using IntermediateLab_Backend.Application.Interfaces.Repositories;
+using IntermediateLab_Backend.Application.Interfaces.Security;
 using IntermediateLab_Backend.Application.Interfaces.Service;
+using IntermediateLab_Backend.Application.Security;
 using IntermediateLab_Backend.Application.Services;
 using IntermediateLab_Backend.Infrastructure;
 using IntermediateLab_Backend.Infrastructure.Repositories;
 using IntermediateLab_Backend.Infrastructure.Smtp;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,6 +51,24 @@ builder.Services.AddScoped(_ => new SmtpClient
 								});
 
 builder.Services.AddScoped<IMailer, Mailer>();
+
+TokenManager.Config config = builder.Configuration.GetSection("Jwt")
+	.Get<TokenManager.Config>() ?? throw new Exception("Missing jwt config");
+builder.Services.AddSingleton<ITokenManager, TokenManager>(_ => new TokenManager(config));
+builder.Services.AddScoped<IAuthService, AuthService>();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+	options.TokenValidationParameters = new TokenValidationParameters
+	{
+		ValidateAudience = true,
+		ValidAudience = config.Audience,
+		ValidateIssuer = true,
+		ValidIssuer = config.Issuer,
+		ValidateLifetime = true,
+		ValidateIssuerSigningKey = true,
+		IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.Secret))
+	});
+
 builder.Services.AddCors(b => b.AddDefaultPolicy(o =>
 												 {
 													 o.AllowAnyMethod();
@@ -60,6 +85,7 @@ app.UseSwagger();
 app.UseSwaggerUI();
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
