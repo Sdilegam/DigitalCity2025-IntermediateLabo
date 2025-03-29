@@ -53,8 +53,8 @@ namespace IntermediateLab_Backend.API.Controllers
 			}
 		}
 
-		[HttpDelete("{id}")]
-		public IActionResult Delete([FromRoute] int id)
+		[HttpDelete]
+		public IActionResult Delete([FromQuery] int id)
 		{
 			try
 			{

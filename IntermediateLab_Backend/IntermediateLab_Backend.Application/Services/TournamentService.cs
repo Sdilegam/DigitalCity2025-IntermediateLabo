@@ -14,6 +14,7 @@ public class TournamentService(ITournamentRepository tournamentRepository, IMemb
 	{
 		List<Tournament>  tournamentsToReturn = tournamentRepository.GetAllWithPlayers().OrderByDescending(t=>t.LatestUpdate).Take(10).ToList();
 		GetTournamentsDTO[] DTOToReturn = tournamentsToReturn.Select(tournament => new GetTournamentsDTO (){
+			Id =  tournament.Id,
 			Name = tournament.Name,
 			Location =  tournament.Location,
 			MinPlayerAmount =  tournament.MinPlayerAmount,
@@ -55,8 +56,8 @@ public class TournamentService(ITournamentRepository tournamentRepository, IMemb
 											Location            = DTO.Location,
 											MinPlayerAmount     = DTO.MinPlayerAmount,
 											MaxPlayerAmount     = DTO.MaxPlayerAmount,
-											MinPlayerElo        = DTO.MinPlayerElo,
-											MaxPlayerElo        = DTO.MaxPlayerElo,
+											MinPlayerElo        = DTO.MinPlayerElo??0,
+											MaxPlayerElo        = DTO.MaxPlayerElo??3000,
 											InscriptionsEndDate = DTO.InscriptionsEndDate,
 											CreationDate        = creationDate,
 											LatestUpdate        = creationDate,

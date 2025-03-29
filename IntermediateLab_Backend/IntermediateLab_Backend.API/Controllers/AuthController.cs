@@ -18,7 +18,7 @@ namespace IntermediateLab_Backend.API.Controllers
             try
             {
                 string tokenToReturn = authService.Login(loginDTO);
-                return Ok(tokenToReturn);
+                return Ok(new {Token = tokenToReturn});
             }
             catch (Exception e)
             {
@@ -27,7 +27,7 @@ namespace IntermediateLab_Backend.API.Controllers
         }
 
         [HttpGet("refreshToken")]
-        public IActionResult RefreshToken([FromQuery] string token)
+        public IActionResult RefreshToken([FromQuery]string token)
         {
             string tokenToReturn = null!;
             try

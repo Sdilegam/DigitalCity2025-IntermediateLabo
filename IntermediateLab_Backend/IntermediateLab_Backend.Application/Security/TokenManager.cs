@@ -34,7 +34,7 @@ public class TokenManager(TokenManager.Config config): ITokenManager
     private IEnumerable<Claim> CreateClaims(int id, string email, RoleEnum role)
     {
         yield return new Claim(ClaimTypes.Email, email);
-        yield return new Claim(ClaimTypes.Role, role.ToString());
+        yield return new Claim(ClaimTypes.Role, ((int)role).ToString());
         yield return new Claim(ClaimTypes.NameIdentifier, id.ToString(), ClaimValueTypes.Integer32);
     }
     

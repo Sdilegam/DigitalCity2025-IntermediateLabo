@@ -4,6 +4,7 @@ namespace IntermediateLab_Backend.Application.DTO.Tournament;
 
 public class GetTournamentsDTO
 {
+    public int Id { get; set; }
     public string   Name                { get; set; } = null!;
     public string?  Location            { get; set; }
     public int  CurrentPlayerNumber            { get; set; }
