@@ -1,6 +1,7 @@
 ﻿import {TournamentCatEnum} from '../enums/tournament-cat-enum';
 
 export interface TournamentListItem {
+  id: number
   name: string;
   location?: string;
   playerAmount: number;

@@ -9,6 +9,7 @@ import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { providePrimeNG } from 'primeng/config';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
+import {tokenInterceptor} from './interceptors/token.interceptor';
 
 
 export const appConfig: ApplicationConfig = {
@@ -17,12 +18,12 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimations(),
     provideHttpClient(withInterceptors([
-
+      tokenInterceptor,
     ])),
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {
-        preset: Material,
+        preset: Aura,
       }
     }),
     MessageService,

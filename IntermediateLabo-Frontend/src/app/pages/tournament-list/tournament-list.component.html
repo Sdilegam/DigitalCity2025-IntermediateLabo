@@ -1,3 +1,5 @@
+<script src="../register-member/register-member.component.ts"></script>
+<script src="tournament-list.component.ts"></script>
 <p-button
   styleClass="mb-2"
   routerLink="create"
@@ -11,16 +13,50 @@
   <p-table [columns]="Colonne" [value]="TournamentList" [tableStyle]="{ 'min-width': '50rem' }">
     <ng-template #header let-columns>
       <tr>
-        <th *ngFor="let col of columns">
-          {{ col.header }}
-        </th>
+        @for (col of columns; track col) {
+          <th>
+            {{ col.header }}
+          </th>
+        }
       </tr>
     </ng-template>
     <ng-template #body let-rowData let-columns="columns">
       <tr>
-        <td *ngFor="let col of columns">
-          {{ rowData[col.field] }}
+        <td>
+          {{ rowData['name'] }}
         </td>
+        <td>
+          {{ ((rowData['location']=="" || rowData['location']== null)? "Inconnu":rowData['location'])}}
+        </td>
+        <td>
+            @for(catNumber of rowData['categories'] ; track $index) {
+              <div class="m-1 inline-block">
+              <p-chip severity="success" [label]="TournamentCatEnum[catNumber]" />
+              </div>
+            }
+        </td>
+        <td>
+          {{ rowData['minPlayerElo'] }} - {{rowData['maxPlayerElo']}}
+        </td>
+        <td>
+          {{ TournamentStatus[rowData['status']] }}
+        </td>
+        <td>
+          {{ rowData['inscriptionsEndDate'] | date}}
+        </td>
+        <td>
+          {{ rowData['currentPlayerNumber']}}/{{rowData['maxPlayerAmount']}}
+        </td>
+        <td>
+          {{ rowData['currentRound']}}
+        </td>
+        <td>
+          <div>
+          <p-button styleClass="m-1 inline-block" icon="pi pi-search" [rounded]="true" severity="info" routerLink="/tournament/{{rowData['id']}}" />
+          <p-button styleClass="m-1 inline-block" icon="pi pi-times" [rounded]="true" severity="danger" (onClick)="deleteTournament(rowData['id'])" />
+          </div>
+        </td>
+
       </tr>
     </ng-template>
   </p-table>

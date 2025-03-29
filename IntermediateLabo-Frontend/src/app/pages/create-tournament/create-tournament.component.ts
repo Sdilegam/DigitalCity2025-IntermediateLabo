@@ -13,6 +13,7 @@ import {DatePicker} from 'primeng/datepicker';
 import {TournamentService} from '../../services/tournament.service';
 import {MultiSelect} from 'primeng/multiselect';
 import {TournamentCatEnum} from '../../enums/tournament-cat-enum';
+import {InputNumber} from 'primeng/inputnumber';
 
 @Component({
   imports: [
@@ -26,6 +27,7 @@ import {TournamentCatEnum} from '../../enums/tournament-cat-enum';
     DatePicker,
     FormErrorComponent,
     MultiSelect,
+    InputNumber,
   ],
   templateUrl: './create-tournament.component.html',
   styleUrl: './create-tournament.component.scss'
@@ -39,7 +41,11 @@ export class CreateTournamentComponent {
   messageService = inject(MessageService);
   tournamentService = inject(TournamentService);
   // faire des requètes vers l'api
-  categories = TournamentCatEnum
+  categories = [
+    {label:TournamentCatEnum[1],value:1},
+    {label:TournamentCatEnum[2],value:2},
+    {label:TournamentCatEnum[4],value:4},
+  ]
 
   isLoading = false;
 

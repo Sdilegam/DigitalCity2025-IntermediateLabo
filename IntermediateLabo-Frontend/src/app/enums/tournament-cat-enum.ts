@@ -1,5 +1,5 @@
-export const TournamentCatEnum = [
-  { label: 'junior', value: 1 },
-  { label: 'senior', value: 2 },
-  { label: 'veteran', value: 4 },
-]
+export enum TournamentCatEnum{
+  junior=1,
+  senior= 2,
+  veteran = 4
+}

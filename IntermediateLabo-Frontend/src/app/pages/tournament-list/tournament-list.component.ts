@@ -3,52 +3,68 @@ import {TournamentListItem} from '../../models/tournamentListItem.model';
 import {TournamentService} from '../../services/tournament.service';
 import {ButtonModule} from 'primeng/button';
 import {TableModule} from 'primeng/table';
-import {NgForOf} from '@angular/common';
+import {DatePipe, NgForOf} from '@angular/common';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {Card} from 'primeng/card';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TournamentCatEnum} from '../../enums/tournament-cat-enum';
+import {Tag} from 'primeng/tag';
+import {TournamentStatus} from '../../enums/tournament-status';
+import {MessageService} from 'primeng/api';
+import {Chip} from 'primeng/chip';
 
 @Component({
   imports: [
     TableModule,
-    NgForOf,
     RouterLink,
     ButtonModule,
     Card,
     FormsModule,
     ReactiveFormsModule,
+    Tag,
+    DatePipe,
+    Chip,
   ],
   templateUrl: './tournament-list.component.html',
   styleUrl: './tournament-list.component.scss'
 })
 export class TournamentListComponent {
   TournamentList: Array<TournamentListItem> = null!;
+  messageService = inject(MessageService);
 
   tournamentService = inject(TournamentService);
 
   Colonne = [
     {field:'name', header:'Nom'},
     {field:"location", header:"Lieu"},
-    {field:"playerAmount", header:"Nombre de joueurs"},
-    {field:"minPlayerAmount", header:"Nombre de joueurs minimum"},
-    {field:"maxPlayerAmount", header:"Nombre de joueurs maximum"},
     {field:"categories", header:"Categories"},
-    {field:"minPlayerElo", header:"Elo minimal des joueurs"},
-    {field:"maxPlayerElo", header:"Elo maximal des joueurs"},
+    {field:"Elo", header:"Elo autorisés"},
     {field:"status", header:"Status"},
     {field:"inscriptionsEndDate", header:"Date de fin d'inscription"},
+    {field:"playerAmount", header:"Nombre de joueurs"},
     {field:"currentRound", header:"Ronde courante"},
+    {field:"Actions", header:""},
   ]
-  route = inject(ActivatedRoute)
-  constructor() {
-    this.tournamentService.getAllTournament().subscribe(list => this.TournamentList = list);
-    console.log(this.route.snapshot.params['id']);
+
+
+  deleteTournament(TournamentId:number){
+    this.tournamentService.delete(TournamentId).subscribe({
+      next: () => {
+        this.messageService.add({ severity: 'success', summary: 'Le tournoi a bien été supprimé' });
+        const indexToDelete = this.TournamentList.findIndex(tournament => tournament.id === TournamentId);
+        this.TournamentList.splice(indexToDelete, 1);
+      }
+    })
   }
-  test(){
-    // this.tournamentService.getAllTournament().subscribe(x=>this.TournamentList = x);
+  constructor() {
+    this.tournamentService.getAllTournament().subscribe(list => {
+      this.TournamentList = list;
+
     console.log(this.TournamentList);
+    });
   }
 
   protected readonly categories = TournamentCatEnum;
+  protected readonly TournamentCatEnum = TournamentCatEnum;
+  protected readonly TournamentStatus = TournamentStatus;
 }

@@ -17,4 +17,7 @@ export class TournamentService {
   register(form: any){
     return this.httpClient.post(environment.baseApiUrl + '/Tournament', form);
   }
+  delete(TournamentId:number){
+    return this.httpClient.delete(environment.baseApiUrl + '/Tournament?id=' + TournamentId);
+  }
 }
