@@ -1,0 +1,79 @@
+<p-card styleClass="mb-2 w-fit mx-auto">
+  <ng-template #title>
+  </ng-template>
+  <div class="flex flex-row h-4rem">
+    <ng-container pStyleClass="text-2xl"
+      [ngTemplateOutletContext]="{title:'Nom du tournoi', content:currentTournament.name}"
+      [ngTemplateOutlet]="detailItem">
+    </ng-container>
+    <p-divider layout="vertical"/>
+      <ng-container
+        [ngTemplateOutletContext]="{title:'Status', content:TournamentStatus[currentTournament.status]}"
+        [ngTemplateOutlet]="detailItem">
+      </ng-container>
+
+    <p-divider layout="vertical"/>
+<!--    <ng-container-->
+<!--      [ngTemplateOutletContext]="{-->
+<!--      title:'Nombre de joueurs',-->
+<!--      content:'<span class=\'red\'> test </span>'}"-->
+<!--      [ngTemplateOutlet]="detailItem">-->
+<!--    </ng-container>-->
+    <div>
+      <p class="title">Nombre de joueurs</p>
+      <span class="value">
+      <span [ngClass]="{'red' : currentTournament.currentPlayerAmount < currentTournament.minPlayerAmount}">
+        {{ currentTournament.currentPlayerAmount }}</span>/{{ currentTournament.maxPlayerAmount }} joueurs
+      </span>
+    </div>
+    <p-divider layout="vertical"/>
+    <div>
+      <p class="title">Catégories</p>
+      <span class="value">
+
+      @for (catNumber of currentTournament.categories; track $index) {
+        <div class="m-1 inline-block">
+          <p-chip [label]="TournamentCatEnum[catNumber]"/>
+        </div>
+      }
+      </span>
+    </div>
+    <p-divider layout="vertical"/>
+    <ng-container
+      [ngTemplateOutletContext]="{title:'Limitations des joueurs', content:(currentTournament.isWomanOnly ? 'Réservé aux femmes' : 'Ouvert a tous')}"
+      [ngTemplateOutlet]="detailItem">
+    </ng-container>
+    <p-divider layout="vertical"/>
+    <ng-container
+      [ngTemplateOutletContext]="{title:'Elo', content:currentTournament.minPlayerElo +' - '+ currentTournament.maxPlayerElo}"
+      [ngTemplateOutlet]="detailItem">
+    </ng-container>
+    <p-divider layout="vertical"/>
+      <ng-container
+        [ngTemplateOutletContext]="{title:'Date limite des inscriptions', content:currentTournament.inscriptionsEndDate | date }"
+        [ngTemplateOutlet]="detailItem">
+      </ng-container>
+    </div>
+  <ng-template #footer>
+  </ng-template>
+</p-card>
+
+
+<ng-template #detailItem let-title='title' let-content='content' >
+  <div>
+    <p class="title">{{ title }}</p>
+    <span [innerHTML]="content" class="value">
+    </span>
+  </div>
+</ng-template>
+
+
+<p-card>
+  <ng-template #title>
+    {{ currentTournament.name }}
+  </ng-template>
+  <ng-template #body>
+  </ng-template>
+  <ng-template #footer>
+  </ng-template>
+</p-card>

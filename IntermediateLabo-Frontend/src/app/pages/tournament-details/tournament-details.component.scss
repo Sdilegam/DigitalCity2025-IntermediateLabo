@@ -1,0 +1,19 @@
+
+.red{
+  color:firebrick;
+}
+
+.title{
+  color:gray;
+  font-size:.7rem;
+  margin-bottom: .1rem;
+}
+
+div:has(>.title){
+  display: flex;
+  flex-direction: column;
+}
+
+.value{
+  margin-block: auto;
+}
