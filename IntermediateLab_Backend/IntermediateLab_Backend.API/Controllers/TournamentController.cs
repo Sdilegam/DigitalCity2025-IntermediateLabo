@@ -30,7 +30,7 @@ namespace IntermediateLab_Backend.API.Controllers
 		[HttpGet("{tournamentId}")]
 		public IActionResult GetTournament([FromRoute] int tournamentId)
 		{
-			Tournament? tournamentsToReturn = tournamentService.GetTournament(tournamentId);
+			TournamentDetailsDTO? tournamentsToReturn = tournamentService.GetTournament(tournamentId);
 			if (tournamentsToReturn == null)
 				return NotFound();
 			return (Ok((tournamentsToReturn)));

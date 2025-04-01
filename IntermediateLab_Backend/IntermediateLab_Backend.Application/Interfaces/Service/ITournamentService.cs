@@ -9,7 +9,7 @@ public interface ITournamentService
 	public bool       Delete(int                 id);
 	public GetTournamentsDTO[] GetAllTournaments();
 	public Tournament RegisterToTournament(int memberId, int tournamentId);
-	public Tournament? GetTournament(int id);
+	public TournamentDetailsDTO? GetTournament(int id);
 	public bool StartTournament(int tournamentId);
 
 }

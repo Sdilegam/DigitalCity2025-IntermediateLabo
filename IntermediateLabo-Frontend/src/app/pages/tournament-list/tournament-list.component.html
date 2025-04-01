@@ -22,38 +22,40 @@
     </ng-template>
     <ng-template #body let-rowData let-columns="columns">
       <tr>
-        <td>
+        <td routerLink="/tournament/{{rowData['id']}}">
           {{ rowData['name'] }}
         </td>
         <td>
-          {{ ((rowData['location']=="" || rowData['location']== null)? "Inconnu":rowData['location'])}}
+          {{ ((rowData['location'] == "" || rowData['location'] == null) ? "Inconnu" : rowData['location']) }}
         </td>
         <td>
-            @for(catNumber of rowData['categories'] ; track $index) {
-              <div class="m-1 inline-block">
-              <p-chip severity="success" [label]="TournamentCatEnum[catNumber]" />
-              </div>
-            }
+          @for (catNumber of rowData['categories']; track $index) {
+            <div class="m-1 inline-block">
+              <p-chip severity="success" [label]="TournamentCatEnum[catNumber]"/>
+            </div>
+          }
         </td>
         <td>
-          {{ rowData['minPlayerElo'] }} - {{rowData['maxPlayerElo']}}
+          {{ rowData['minPlayerElo'] }} - {{ rowData['maxPlayerElo'] }}
         </td>
         <td>
           {{ TournamentStatus[rowData['status']] }}
         </td>
         <td>
-          {{ rowData['inscriptionsEndDate'] | date}}
+          {{ rowData['inscriptionsEndDate'] | date }}
         </td>
         <td>
-          {{ rowData['currentPlayerNumber']}}/{{rowData['maxPlayerAmount']}}
+          <span [ngClass]="{'red' : rowData['currentPlayerNumber'] < rowData['minPlayerAmount']}"> {{ rowData['currentPlayerNumber'] }}</span>/{{ rowData['maxPlayerAmount'] }}
         </td>
         <td>
-          {{ rowData['currentRound']}}
+          {{ rowData['currentRound'] }}
         </td>
         <td>
           <div>
-          <p-button styleClass="m-1 inline-block" icon="pi pi-search" [rounded]="true" severity="info" routerLink="/tournament/{{rowData['id']}}" />
-          <p-button styleClass="m-1 inline-block" icon="pi pi-times" [rounded]="true" severity="danger" (onClick)="deleteTournament(rowData['id'])" />
+            <p-button styleClass="m-1 inline-block" icon="pi pi-search" [rounded]="true" severity="info"
+                      routerLink="/tournament/{{rowData['id']}}"/>
+            <p-button styleClass="m-1 inline-block" icon="pi pi-times" [rounded]="true" severity="danger"
+                      (onClick)="deleteTournament(rowData['id'])"/>
           </div>
         </td>
 

@@ -5,10 +5,12 @@ import {TournamentListComponent} from './pages/tournament-list/tournament-list.c
 import {LoginComponent} from './pages/login/login.component';
 import {AuthenticatedGuard} from './guards/authenticatedGuard';
 import {adminGuard} from './guards/admin.guard';
+import {TournamentDetailsComponent} from './pages/tournament-details/tournament-details.component';
 
 export const routes: Routes = [
   { path: 'member/register', component: RegisterMemberComponent, canActivate:[adminGuard]},
   { path: 'tournaments/create', component: CreateTournamentComponent, canActivate:[adminGuard]},
   { path: 'tournaments', component: TournamentListComponent, canActivate:[AuthenticatedGuard]},
+  { path: 'tournament/:id', component: TournamentDetailsComponent, canActivate:[AuthenticatedGuard]},
   { path: 'login', component: LoginComponent },
 ];

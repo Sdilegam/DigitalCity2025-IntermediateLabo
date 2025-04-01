@@ -29,10 +29,28 @@ public class TournamentService(ITournamentRepository tournamentRepository, IMemb
 		}).ToArray();
 		return (DTOToReturn);
 	}
-	public Tournament? GetTournament(int id)
+	public TournamentDetailsDTO? GetTournament(int id)
 	{
 		Tournament? tournament = tournamentRepository.GetOneWithPlayers(id);
-		return tournament;
+		if (tournament == null)
+			return null;
+		TournamentDetailsDTO tournamentToReturn = new()
+		{
+			Id = tournament.Id,
+			Name = tournament.Name,
+			Location = tournament.Location,
+			MinPlayerAmount = tournament.MinPlayerAmount,
+			MaxPlayerAmount = tournament.MaxPlayerAmount,
+			Categories = CategoriesEnumToIntArray(tournament.Categories),
+			Status = tournament.Status,
+			InscriptionsEndDate = tournament.InscriptionsEndDate,
+			MaxPlayerElo = tournament.MaxPlayerElo,
+			MinPlayerElo = tournament.MinPlayerElo,
+			CurrentRound = tournament.CurrRound,
+			CurrentPlayerAmount = tournament.Players.Count,
+			Players = []
+		};
+		return tournamentToReturn;
 	}
 	public Tournament Create(CreateTournamentDTO DTO)
 	{

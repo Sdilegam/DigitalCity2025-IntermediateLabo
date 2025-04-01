@@ -3,12 +3,11 @@ import {TournamentListItem} from '../../models/tournamentListItem.model';
 import {TournamentService} from '../../services/tournament.service';
 import {ButtonModule} from 'primeng/button';
 import {TableModule} from 'primeng/table';
-import {DatePipe, NgForOf} from '@angular/common';
-import {ActivatedRoute, RouterLink} from '@angular/router';
+import {DatePipe, NgClass, NgForOf} from '@angular/common';
+import {RouterLink} from '@angular/router';
 import {Card} from 'primeng/card';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TournamentCatEnum} from '../../enums/tournament-cat-enum';
-import {Tag} from 'primeng/tag';
 import {TournamentStatus} from '../../enums/tournament-status';
 import {MessageService} from 'primeng/api';
 import {Chip} from 'primeng/chip';
@@ -21,9 +20,9 @@ import {Chip} from 'primeng/chip';
     Card,
     FormsModule,
     ReactiveFormsModule,
-    Tag,
     DatePipe,
     Chip,
+    NgClass,
   ],
   templateUrl: './tournament-list.component.html',
   styleUrl: './tournament-list.component.scss'
